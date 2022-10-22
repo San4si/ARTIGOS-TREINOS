@@ -1,0 +1,33 @@
+body {
+    margin: 0px;
+}
+
+#cabe {
+    background-color: aqua;
+    padding: 10px 10px 10px 10px;
+   }
+#calcular {
+    border-radius: 5px;
+}
+
+#resultado1 {
+    margin: 10px 10px 10px 100px;
+    background-color: blue;
+}
+
+img {
+    border-radius: 100px;
+    height: 200px;
+    border: solid 2px black;
+    margin: 0px 0px 0px 550px;
+}
+
+#user{
+    background-color: black;
+}
+
+
+
+hr {
+    margin: 20px 0px 0px 10px;
+}
