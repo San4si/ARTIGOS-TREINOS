@@ -17,6 +17,9 @@
     </br> </br>
         baixe a versão LTS recomendada.
     </br></br>
+    **********************************************************************************************************
+    <b>COMANDOS TS E EXECUÇÃO</b>
+    </br></br>
         Apos instalado para testar abra o prompt de comando e digite:
     </br> npm --version </br>
         aparecera o versão do NPM, onde indica que o node esta instalado.
@@ -31,7 +34,7 @@
     </br>
         mostrara a versão 
     </br></br>
-        PRONTO O NODE E O TYPESCRIPT ESTÃO INSTALADOS PRONTOS PARA TRABALHAR
+       <b>PRONTO O NODE E O TYPESCRIPT ESTÃO INSTALADOS PRONTOS PARA TRABALHAR</b> 
     </br></br>
     ! Deverá colocar no arquivo HTML o script javascript e não o ts, mesmo não existindo o arquivo js,<br> o ts criara quando for convertido com comando abaixo.<br>
     </br>
@@ -40,13 +43,20 @@
     </br></br>
     O arquivo typescript não roda no navegador, serve apenas para desenvolver. 
 </br></br>
-    Os arquivos devem ser separado em os que vao a publico e desenvolvimento.
-</br> geralmente separamos em pastas com o nome 'public' e 'src'. 
+    <b>Os arquivos devem ser separado em os que vao a publico e desenvolvimento.</b>
+</br></br> geralmente separamos em pastas com o nome <b>'public' e 'src'</b>. 
 </br> onde os arquivos js e html irao para public e src o codigo ts.
 </br></br>
     Ao separar em pastas quando converter o arquivo ts que esta dentro da pasta 'src' deve ser gerado o js </br>
     dentro da pasta <b>' public '</b>. No terminal deve digitar o seguinte comando: <b>tsc src/script.ts --outDir public </b> </br>
     Com o comando<b>' --outDir public ' </b> ira colocar o arquivo js convertido dentro da pasta <b>' public '</b>.
+
+</br></br>
+<b>Prevenindo a criação do arquivo .js quando houver um erro</b></br></br>
+No momento da conversão do ts para js se houver um erro mostrara detalhadamente o erro</br>
+mesmo assim o arquivo .js é gerado, o comando abaixo mostrara como evitar a criação do arquivo .js quando houver um erro.</br>
+Com o comando <b> --noEmitOnError </b> a execução é parada e não gera o arquivo .js </br>
+Exemplo: <b> tsc src/script.ts --noEmitOnError </b>
     </p>
 </body>
 </html>

@@ -13,5 +13,5 @@ function calcular(n1: number,n2: number){
 
 botao.addEventListener('click', function(){
     res.innerHTML = calcular(+numero1.value, +numero2.value).toString();//colocando o sinal + para converter para inteiro - toString pegando o resultado final e convertendo para string
-    //res.innerHTML = calcular(parseInt(numero1.value), parseInt(numero2.value)); //usando parseInt para converter para inteiro
+    //res.innerHTML = calcular(parseInt(numero1.value), parseInt(numero2.value)); //Outra forma é usando parseInt para converter para inteiro
 });
