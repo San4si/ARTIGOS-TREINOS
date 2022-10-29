@@ -1,0 +1,33 @@
+Testando o Node no terminal e verificando versões
+Comando: node -v
+Comando: node --version 
+
+Verificando o Node Package Management
+npn -version
+
+Criando o primeiro projeto
+No terminal na pasta do projeto roda o comando:
+Comando: npm init
+Proximo passo é só dar enter nas perguntas relacionadads ao projeto ou nomear se desejavel.
+Apos todos os passos sucedidos criara um arquivo chamado package.json que é os dados basicos 
+infomados relacionados ao projeto.
+Caso queira ignorar as perguntas relacionadas ao projeto rode o comando abaixo:
+Comando: npm init -y
+
+O arquivo package.json é onde estara todas as informações e bibliotecas importantes do projeto.
+
+Executando um codigo js no terminal.
+Comando: node nomeDoArquivo.js
+
+Instalando o Typescript no projeto
+Comando: npm install -g typescript
+
+Iniciando o typescript
+Comando: tsc --init
+
+Ao baixar um novo projeto do github deve rodar comando
+npm install
+vai criar todas as pastas necessarias para o desenvolvimento
+
+Deixando o Typescript monitorando a pasta do projeto com Wath mode
+Comando: tsc -w 
