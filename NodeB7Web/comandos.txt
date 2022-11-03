@@ -31,3 +31,20 @@ vai criar todas as pastas necessarias para o desenvolvimento
 
 Deixando o Typescript monitorando a pasta do projeto com Wath mode
 Comando: tsc -w 
+
+habilitando arquivo para uso externo
+Comando: module.exports.funcaoSomar = funcaoSomar;
+
+Instalando biblioteca
+comando: npm install validator
+
+instalando as declarações da biblioteca validator
+npm install --save-dev @types/validator
+
+Usando a biblioteca nodemom executa o codigo sem dar start
+Instalando: npm install -g nodemon
+Rodando: nodemon dist/index.js 
+
+Usando o ts-node 
+
+
