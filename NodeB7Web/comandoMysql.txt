@@ -1,0 +1,23 @@
+ORM - OBJECT RELATIONAL MAPPER
+MAPEAMENTO OBJETO-RELACIONAL
+
+Biblioteca ORM Sequelize
+npm install --save sequelize
+
+Sequelize para rodar precisa das seguintes bibliotecas
+@types/node
+@types/validator
+@types/sequelize = npm install --save-dev @types/sequelize
+
+
+Fazendo a conexão no MySql
+Instalar a biblioteca de gerenciamento do MySql
+npm install mysql2
+
+Configurando no env os dados para conexão do banco de dados
+MYSQL_DB=teste
+MYSQL_USER=root
+MYSQL_PASSWORD=root
+MYSQL_PORT=3306
+
+
