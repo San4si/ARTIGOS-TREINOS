@@ -45,6 +45,35 @@ Usando a biblioteca nodemom executa o codigo sem dar start
 Instalando: npm install -g nodemon
 Rodando: nodemon dist/index.js 
 
-Usando o ts-node 
+Usando o ts-node que faz um comdando em 2, converte ts em js e ts -w 
+Instalando: npm install -g ts-node
+rodando: ts-node src/index.ts ou se intalado o nodemon: nodemon src/index.ts
+com ts-node podemos rodar direto o codigo fonte sendo a pasta src
+se instalado o nodemon podemos apenas rodar o nodemon que suporta o ts-node
+rodando: nodemon src/index.ts
+
+Templates Engine
+Instalando e configurando o mustache
+npm install mustache-express
+npm install --save-dev @types/mustache-express
+
+Variaveis de ambiente
+npm install dotenv
+Importando no server
+import dotenv from 'dotenv';
+Comando config no server
+dotenv.config();
+informando a porta no server
+server.listen(process.env.PORT);
+
+
+
+
+
+
+
+
+
+
 
 

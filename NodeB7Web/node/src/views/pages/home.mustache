@@ -1,0 +1,39 @@
+{{>partials/header}}
+
+    Opa, tudo bem {{ user.name }}, você tem {{ user.age }} anos?
+    {{#showCond}}
+    Beleza?
+    {{/showCond}}
+
+    <hr/>
+
+    <h2>Produtos</h2>
+
+    <ul>
+        {{#products}}
+            {{>partials/productItem}}
+        {{/products}}
+    </ul>
+
+    <hr/>
+
+    <h2>Produtos a partir de R$ 12</h2>
+
+    <ul>
+        {{#expensives}}
+            {{>partials/productItem}}
+        {{/expensives}}
+    </ul>
+
+    <hr/>
+
+    <ul>
+        {{#frasesDoDia}}
+            <li>{{.}}</li>
+        {{/frasesDoDia}}
+        {{^frasesDoDia}}
+            Não há frases hoje
+        {{/frasesDoDia}}
+    </ul>
+
+{{>partials/footer}}
