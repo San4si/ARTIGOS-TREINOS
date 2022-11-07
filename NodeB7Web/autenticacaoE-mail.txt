@@ -1,0 +1,73 @@
+Autenticação vs Autorização
+
+Autenticação é basicamente o ato de Saber quem é que esta tentando acessar.
+
+Autorização é basicamente o ato de verificar se o objeto ou requisitor
+pode acessar aquela area especifica
+
+Tipo de autenticação
+-Single-factor Authentication = Autenticação em 1 fator
+- Two-factor Authentication (2FA) = Autenticação em 2 fatores
+- Multi-factor authentication (MFA) - Autenticação em multiplos fatores
+- Single Sign-On (SSO) = autenticação unica "universal"
+
+Tipos de retorno
+- Basic Auth - a cada requisição manda um BASE64(USER E SENHA CRIPTOGRAFADO) 
+- OAuth (1 e 2)
+-- OAuth 1 = Usar um terceiro para gerar um token com tempo de inspiração
+--OAuth 2 = OAuth 1 + Refreshtoken - a cada tempo ele envia um token
+-- JWT (JSON WEB TOKEN) GERA TOKEN E DEVOLVE PRA QUEM ESTA ACESSANDO
+
+
+Tornando o endpoint privado
+
+Passo 1
+
+Dentro de src criar a pasta middlewares e dentro dela criar o arquivo auth.ts
+Colocar os imports
+
+import { Request, Response, NextFunction} from 'express';
+
+colocar as funções private middleware
+
+export const Auth = {
+    private: (req: Request, res: Response, next: NextFunction) => {
+        //fazer verificação de auth
+
+        let sucess = true; // quando estiver true a requisição é enviada, false não sera enviada
+
+        if(sucess){
+            next();
+        }else {
+            res.status(403); //Not Authorized
+            res.json({ error: 'Não autorizado' });
+        }
+    }
+}
+
+
+Passo 2
+Ir na pasta route no arquivo de rota devemos colocar o import da pasta midlewares>auth
+import {Auth} from '../middlewares/auth'
+
+Devemos tornar as rotas privadas colocando o private da seguinte forma nas rotas
+router.get('/list', Auth.private, ApiController.list);
+
+
+Passo 3
+Fazendo um atenticação ultilizando o - Basic Auth
+toda requisição que fizer tambem manda user e senha nos cabeçalhos da requisição
+
+
+
+
+
+
+
+
+
+
+
+
+
+
