@@ -1,0 +1,102 @@
+no code na pasta do projeto vazia
+
+Para começar no terminal os seguintes comandos
+
+PASSO - 1
+iniciar o projeto:
+npn init
+
+PASSO - 2
+Instalando dependencias:
+npm install dotenv express pg pg-hstore sequelize validator
+
+PASSO - 3
+iniciar o typescript
+tsc --init
+
+PASSO - 4
+Este comando vai criar o tsconfig.json onde devemos fazer alguma configurações basicas
+"target" "es6",
+"outDir": "./dist", esta pasta nao precisa criar
+"rootDir" "./src", a pasta src deve criar
+"moduleResolution" "node", descomentar
+salvar e configurações ts criadas com sucesso
+
+PASSO - 5
+Vamos instalar os @types (-D é o mesmo que --save-dev)
+npm install -D @types/express @types/node @types/sequelize @types/validator
+
+PASSO - 6
+Vamos criar nosso servidor na pasta src 'novo arquivo' server.ts
+
+PASSO - 7
+Configurando o servidor no arquivo server.ts
+
+import express from "express";
+import path from 'path';
+import dotenv from 'dotenv';
+
+dotenv.config(); //para iniciar as variaveis de ambiente
+
+const server = express(); //criando o servidor
+
+//Criando a pasta public
+server.use(express.static(path.join(__dirname, '../public')));
+server.use(express.urlencoded({extended: true}));
+
+server.listen(process.env.PORT);
+
+PASSO - 8
+Criar fora de src o arquivo .env e definir as seguintes configurações:
+PORT=4000
+
+PASSO - 9
+Criar fora a pasta public
+
+PASSO - 10
+Voltar para o arquivo server.ts e criar um endpoint erro 404 antes da configuração listen
+no import express colocar antes de from os seguinte types: ,{Request, Response }
+Criar a função para quando não encontrar nenhuma URL
+
+server.use((req: Request, res: Response) => {
+    res.status(404);
+    res.json({error: 'Endpoint não encontrado.'});
+});
+
+PASSO - 11 
+Ir para o arquivo package.json
+Deve ter o nodemon e o ts-node instalado globalmente na maquina
+em scripts: adicionar na proxima linha apos o "teste" o seguinte comando:
+,
+    "start-dev": "nodemon -e ts,json src/server.ts"
+
+PASSO - 12
+No terminal rodar o comando:
+npm run start-dev
+
+Apos o start Ir no navegador digitar: http://localhost:4000
+deve informar o retorno que criamos para o erro 404, pois nao criamos nenhuma rota
+
+Apos estas configurações estamos com o projeto base para construção de APIs
+
+INFORMAÇÃO: ALTERNATIVA PARA QUEM NAO ESTAR AFIM DE INSTALAR O NODEMON E TS-NODE GLOBALMENTE
+O PACOTE ts-node-dev faz o restart da aplicação e utiliza o ts-node debaixo do capo
+
+Instalação:
+yarn add ts-node-dev -D
+npm install ts-node-dev -D
+
+script:
+"srcripts": {
+	"dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts"
+},
+
+Documentação: https://www.npmjs.com/package/ts-node-dev
+
+
+
+
+
+
+
+

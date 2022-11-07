@@ -1,0 +1,59 @@
+ERRO DE CORS ESTA RELACIONADO A UM ERRO NA API
+Cross-origin Resource Sharing 
+Significa uma troca de recursos de origens diferentes
+
+Vamos testar na pratica em um site para testar apis:
+resttesttest.com
+
+Cors é uma politita adotada por todos os navegadores e qualquer sistema que faz requisições a outros sitemas, ou seja que usam apis tem junto a policita chamada de CORS
+
+Esta politica bloqueia por padrão que faça requisições/ consultas de uma url para outra url diferente(que tenha dominio diferente), ha nao ser que app que esta sendo acessado
+permita o acesso de tal site ou dominio, somente com esta liberação consigo acessar. 
+Esta liberação é inserida no header 'Acess-Control-Alow-Origin' este cabeçalho tem que esta na resposta do sistema que esta sendo acessado e nao do que esta acessando
+porque quem habilita a entrada é quem esta sendo acessado este bloqueio nao é apenas para qual site esta acessando agente, existem tambem outros tipos de bloqueios
+por exemplo: O segundo mais famoso é quais metodos estao sendo permitidos, o get na maioria dos casos é permitido, mas os outros metodos post, put,delete tem que ser
+liberados, se não liberar os metodos qualquer outro site quando ele fizer uma requisição usando o metodo put ele sera bloqueado pelo CORs.
+
+O cabeçalho para liberar um endereço é o  'Acess-Control-Alow-Origin' e o metodo que é usado para liberar um metodo especifico é o 'Acess-Control-Alow-Methods'
+
+Resolvendo na pratica:
+Existe uma biblioteca que serve justamente para ter controle sobre este cabeçalhos de forma simples é biblioteca cors
+Instalando a biblioteca em nossa aplicação:
+npmjs.com/package/cors
+
+Passo 1
+Comando para instalar:
+npm install cors
+
+Passo 2
+o cors tem suporte para typescript temos que instalar os types dele:
+npm install -D @types/cors
+
+Passo 3
+Vamos no servidor server.ts e importar o cors
+import cors from 'cors';
+
+Passo 4
+Agora vamos usar o cors, apos o comando de criação do servidor no arquivo server.ts vamos rodar a função cors
+dentro da função cors podemos colocar um objeto {} com configurações especificas que eu quero acessar, quando nao colocar nada vai com a configuração padrão
+
+Libera para todos acessar no caso de estar criando uma api publica
+server.use(cors());//cors com as configurações padrão, este comportamento libera qualquer origem(qualquer site que tentar acessar minha api)
+
+server.use(cors({ //a mesma função de comportamento padrão, pode usar das duas formas
+    origin: '*'
+}));
+
+server.use(cors({ //liberando apenas a url e methods definidos
+    origin: 'https://resttesttest.com/'
+    methods: ['GET', 'POST']
+}));
+
+
+
+
+
+
+
+
+

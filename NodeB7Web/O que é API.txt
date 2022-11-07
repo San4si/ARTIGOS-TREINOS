@@ -1,0 +1,20 @@
+O que é API?
+- Application Programing Interface
+- Interface de Programação de Aplicações
+
+Exemplo de APIs
+- APP logar com facebook
+- Webservices = Serviços da Web = URL DADOS EM FORMA DE TEXTO
+
+- REST
+- Representational State Transfer
+- Transferencia de Estado Representacional
+
+- Restful
+
+GET https://meusite.com.br/api/users = endpoint para pegar a lista de usuarios
+GET https://meusite.com.br/api/users/10 = Enpoint para pegar info de um usuario
+PUT https://meusite.com.br/api/users/10 = (name: 'Sandro', age: 90) Enpoint para alterar usuario
+POST https://meusite.com.br/api/users = (name: 'Sandro', age: 90) Adiciona usuario
+DELETE https://meusite.com.br/api/users/10 = DELETA USUARIO
+

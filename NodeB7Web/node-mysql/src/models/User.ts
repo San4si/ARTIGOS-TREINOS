@@ -12,6 +12,7 @@ export interface UserInstance extends Model {
 export const User = sequelize.define<UserInstance>("User", {
     id: {// dizer os campos para o sequelize
         primaryKey: true,
+        autoIncrement: true,
         type: DataTypes.INTEGER
     },
     name: {

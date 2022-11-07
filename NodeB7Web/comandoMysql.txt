@@ -20,4 +20,252 @@ MYSQL_USER=root
 MYSQL_PASSWORD=root
 MYSQL_PORT=3306
 
+Tipos de Consultas no banco de dados
+//pegando todos os usuários no banco de dados
+let users = await Users.findALL(); 
+
+//pegando apenas os dados que vou ultilizar no caso name e age
+let users = await Users.findALL({
+	attibutes: ['name', 'age']
+});
+
+//mudando o nome de algum campo sem mudar no bdo
+let users = await Users.findALL({
+	attibutes: ['name', ['age', 'idade']]
+});
+
+//Excluindo da exibição o que eu nao quero no caso 'id' e 'age'
+let users = await Users.findALL({
+	attibutes: {exclude: ['id', 'age']}
+});
+
+//Filtrando resultados
+let users = await Users.findALL({
+	where: { name: 'Paulo'} //onde o name for 'Paulo'
+});
+
+//Filtrando apenas quem tem 90 anos
+let users = await Users.findALL({
+	where: { age: 90}
+});
+
+//Filtrando apenas quem tem o id 3
+let users = await Users.findALL({
+	where: { id: 3}
+});
+
+
+//Filtrando duas condiçoes
+let users = await Users.findALL({
+	where: { age: 30, name: 'Paulo' }
+});
+
+#####################################################################################
+
+//Filtrando duas condições com a operação or (ou)
+import {Op} from 'sequelize'; //Op faz operações
+
+let users = await Users.findALL({
+	where: { 
+	[Op.or]: [
+	{age: 55}
+	{name: 'Paulo'}
+	]
+}
+});
+
+//O outra forma com or
+let users = await Users.findALL({
+	where: { 
+	age: [55, 30, 90]
+
+}
+
+//Cosultando o nome pela letra
+User.finALL({
+	where: {
+		name: {
+			[Op.like]: "%M", // "%M%" que tem m em qualquer lugar // que tem "%pa" 
+		},
+	},
+});
+
+//Operadores para fazer a filtragem
+
+let users = await User.findAll({
+        where: {
+            age: {
+                [Op.gt]: 40, //> 40 maior que 40
+                [Op.gte]: 40, // >=40 maior igual a 40
+                [Op.lt]: 40, // < 40 menor que 40
+                [Op.lte]: 40, // <=40 menor igual 40
+		[Op.between]: [40, 100] // pegando quem entre as duas idades
+		[Op.notbetween]: [40, 100] // pegando quem não tem entre as duas idades
+		[Op.in]: [30, 40] //pega todos que tem esta idade
+		[Op.notIn]: [30, 40] //pega todos que não tem esta idade
+		[
+            }
+        }
+    });
+
+
+Ordenação e limitação de resultados
+Como organizar a lista
+
+// order: ['name'] / ordena pelo nome crescente ou order: ['name', 'ASC']
+
+let users = await User.findAll({
+        where: {
+            age: {
+                [Op.gte]: 18 //pegando todos que tem acima de 18
+            }
+        },
+        order: ['name']
+    }); 
+
+
+
+// ordena pelo nome Decrescente order: [['name', 'DESC']]
+
+ let users = await User.findAll({
+        where: {
+            age: {
+                [Op.gte]: 18 //pegando todos que tem acima de 18
+            }
+        },
+        order: [['name', 'DESC']]
+    }); //pegando 
+
+
+
+//Ordena pela idade 
+order: [['age', 'ASC']]
+
+
+Limitando resultados
+offset: 2 //pula a qtd 2 em 2 paginas
+limit: 2 // quantidade a exibir
+
+
+
+Inserindo dados no banco com Sequelize, duas formas de inserir com 'build + save' ou 'create'
+
+//Inserindo com build + save
+cria a instancia do usuario
+    const user = User.build({
+        name: 'Fulaninho',
+        age: 25
+    });
+
+    await user.save(); //salva no banco
+
+//Inserindo user com create sem save
+ const user = await User.create({
+        name: 'Ciclano',
+        age: 39
+   });
+
+//Atualizando o nome e a idade com sequelize
+    //1 parametro dados a serem alterados
+    //2 parametro Condição para encontrar o(s) tem(s)
+
+    await User.update({name: 'Barbara', age: 13}, {
+            where: {
+                id:10
+            }
+    });
+
+
+//Atualizando todos menores de idade para 18
+    await User.update({age: 18}, {
+        where: {
+            age: {
+                [Op.lt]: 18
+            }
+        }
+});
+
+
+Selecionando um usuario pelo id
+let result = await User.findAll({ where: {id: 7} });
+
+Alterando um item especifico
+
+let results = await User.findAll({ where: {id: 7} });
+ if(results.length > 0){
+        let usuario = results[0];
+
+        usuario.name = 'Testador';
+        usuario.age = 18;
+
+        await usuario.save();
+    }
+
+Deletando todos usuarios menor e igual a 18 anos
+await User.destroy({
+	where: {
+		age: {
+			[Op.lte]: 18
+		}
+	}
+});
+
+Outra forma de deletar apenas um item
+let results = await User.findAll({ where: {name: 'Ciclano' } });
+if(results.length > 0 {
+	let usuario = results[0];
+
+	await usuario.destroy();
+}
+
+5 formas de encontrar um registro no banco de dados
+Usando findOne
+ let usuario = await User.findOne({
+        where: {
+            name: "Sandro"
+        }
+    });
+
+    if(usuario){ //exibindo no console
+        console.log(`O usuario ${usuario.name} possui ${usuario.age} anos`);
+    }else {
+        console.log('Usuario nao encontrado');
+    }
+
+Encontrando apenas com id
+let usuario = await User.findByPk(1);
+
+
+Usuario sera criado apenas se nao existir com o findORCreate() // colocar no banco o autoImcrement para nao dar erro
+const [ usuario,created ] = await User.findOrCreate({
+	where: { name: 'Sandro' },
+	defaults: {
+		age: 80
+	}
+});
+
+if(created){
+	console.log("Usuario criado com sucesso");
+} else {
+	concole.log("Usuario existe");
+}
+console.log("Nome: ", usuario.nome);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

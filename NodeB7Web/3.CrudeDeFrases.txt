@@ -1,0 +1,212 @@
+Projeto criado em Criando um api-simples
+CRUD 
+
+CREATED
+READ
+UPDATE
+DELETE
+
+PLANEJAMENTO DOS ENDPOINTS
+
+POST /frases - Criar frases
+GET /frases - Listar todas as frases
+GET /frase/123 - Pegar informações de uma frase
+PUT /frase/123 - Atualizar informações de uma frase
+DELETE /frase/123 - Deletar uma frase
+
+Continuação
+
+Passo 8
+Dentro da pasta src criar as seguintes pastas:
+controllers
+models
+instances
+
+Passo 9
+Dentro da pasta controllers criar um arquivo apiController.ts
+
+import { Request, Response } from 'express';
+
+export const ping = (req: Request, res: Response) => {
+    res.json({pong: true});
+}
+
+//Criando um numero radomico, vamos retornar um numero aletorio
+export const random = (req: Request, res: Response) => {
+    let nRand: number = Math.floor( Math.random() * 10);// Gerando um numero aleatorio entre 0 e 10
+    res.json({number: nRand});
+}
+
+//Enviar um nome e retornar este nome para indicar que estamos recebendo dados
+export const nome = (req: Request, res: Response) => {
+    let nome: string = req.params.nome;
+   // res.json({nome}); //outra forma de exibir
+    res.json({nome: `Você enviou o nome: ${nome}`});//exibindo com template string
+}
+
+
+Passo 10
+Colocar dentro da pasta routers no arquivo api.ts devemos colocar o import e a função no router.get
+import * as ApiController from '../controllers/apiController';
+
+router.get('/ping', ApiController.ping);
+router.get('/random', ApiController.random);
+router.get('/nome/:nome', ApiController.nome);
+
+Passo 11
+Criando a instancia para conectar com o banco de dados
+Dentro da pasta instances criar o arquivo que vamos chamar de pg.ts para conectar com o banco de dados postgree
+Importar o sequelize e o dotenv para pegar as variaveis de ambiente
+
+import { Sequelize } from "sequelize";
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+Passo 12
+Ir para o arquivo .env fora da pasta e criar as variaveis de conexão com postgree
+
+PORT=4000
+
+PG_DB=phrases
+PG_USER=postgres
+PG_PASSWORD=root
+PG_PORT=5432
+
+Passo 13
+Volte para a pasta instances no arquivo pg.ts para fazer a conexão
+
+export const sequelize = new Sequelize(
+    process.env.PG_DB as string,
+    process.env.PG_USER as string,
+    process.env.PG_PASSWORD as string,
+    {
+        dialect: 'postgres',
+        port: parseInt(process.env.PG_PORT as string)
+    }
+);
+
+
+Passe 14
+Vamos agora criar nosso model na pasta models criar o arquivo Phrase.ts 
+
+import { Model, DataTypes } from 'sequelize';
+import { sequelize } from '../instances/pg';
+
+export interface PhraseInstance extends Model {
+    id: number;
+    author: string;
+    txt: string;
+}
+
+export const Phrase = sequelize.define<PhraseInstance>('Phrase', {
+    id: {
+        primaryKey: true,
+        autoIncrement: true,
+        type: DataTypes.INTEGER
+    },
+    author: {
+        type: DataTypes.STRING
+    },
+    txt: {
+        type: DataTypes.STRING
+    }
+}, {
+    tableName: 'phrases',
+    timestamps: false
+});
+
+
+Passe 15
+Devemos agora importar o models no arquivo na nossa controller para começar a utilizar e criar nossas endipoints
+Neste caso vamos colocar na controlller apiController.ts
+
+import {Phrase} from '../models/Phrase';
+
+PROJETO AGORA ESTA PRONTINHO PARA COMEÇAR A CRIAR NOSSA API DE FRASES QUE PLANEJAMOS 
+
+Passe 16
+Vamos criar um endpoint para criar e add frases novas com o methodo POST
+
+export const createPhrase = async (req: Request, res: Response) => {
+    /*O processo para criar uma frase primeiro temos que receber os dados foram enviados 
+    Requisição usando o metodo post recebemos os dados no corpo da requisição
+    */
+   //let author: string = req.body.author; 
+   //let txt: string = req.body.txt;
+   let {author, txt } = req.body;
+
+   //agora vou usar estes dados para inserir no banco de dados atraves do model
+   let newPhrase = await Phrase.create({author, txt}); 
+   
+   //Retornando a frase no json de retorno
+       res.json({ id: newPhrase.id, author, txt});
+}
+
+Passo 17
+Listando todas as frases
+//Listando todas as frases
+export const listPhrases = async (req: Request, res: Response) => {
+    let list = await Phrase.findAll();//pguei todas as minhas frases
+    res.json({list});
+    //dando retorno
+}
+
+Passo 18
+Pegando informação de uma frase
+export const getPhrase = async (req: Request, res: Response) => {
+    let {id} = req.params;
+
+    let phrase = await Phrase.findByPk(id);
+    if(phrase){
+        res.json({ phrase });//Se achei a frase eu mando ela com toda informação do id
+    }else {
+        res.json({ error: 'Frase não encontrada' });//caso id nao encontrado eu mando um erro
+    }
+}
+
+Passo 19
+//Atualizando informações de uma frase
+
+//Atualizando informações de uma frase
+export const updatePhrase = async (req:Request, res: Response) => {
+    let {id} = req.params;
+    let { author, txt } = req.body; //informando o que eu preciso receber
+
+    let phrase = await Phrase.findByPk(id);
+    if(phrase){
+        phrase.author = author;//fazendo a troca das informações
+        phrase.txt = txt;
+        await phrase.save();//salvando as informações
+
+        res.json({ phrase });//reatorna as informações atualizadas
+    }else {
+        res.json({ error: 'Frase não encontrada' });//caso id nao encontrado eu mando um erro
+    }
+
+Passo 20
+Deletando uma frase
+export const deletePhrase = async (req: Request, res:Response) => {
+    let { id } = req.params; //pegando o id dos parametros
+
+    await Phrase.destroy({where: {id:id}});
+    res.json({});//nao retorna nada pois deletamos
+}
+
+Passo 21
+Pegando uma frase aleatoria = get /frase/aleatoria
+export const randomPhrase = async (req: Request, res:Response) => {
+    //pegando um item aleatoriamento do banco de dados, precisamos da ajuda do sequelize vamos importar
+    let phrase =await Phrase.findOne({//findOne pega uma frase especifica
+        order: [
+            Sequelize.fn('RANDOM') // função que executa dentro do postgres (com mysql a função é 'RAND')
+        ]
+    });
+
+    if(phrase){
+        res.json({ phrase });
+    }else {
+        res.json({error: 'Não ha frase cadastradas'});
+    }
+  
+}

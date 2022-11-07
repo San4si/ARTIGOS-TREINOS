@@ -1,0 +1,82 @@
+CRIANDO UMA API SIMPLES
+
+Criar dois endpoints
+
+O primeiro endpoint vai retornar um numero aleatorio
+O segundo iremos mandar um nome e o endpoint vai devolver 
+este nome indicando que conseguiu ler a informação que agente mandou
+
+Passo 1
+Dentro da pasta src vamos criar a pasta: routes
+Dentro da pasta routes vamos criar um arquivo: api.ts
+Neste arquivo api.ts ficara as rotas das apis
+
+Passo 2
+No arquivo api.ts vamos colocar as configurações necessarias:
+
+import { Router } from 'express';
+
+const router = Router();
+
+export default router;
+
+Passo 3
+Ainda no arquivo api.ts apos: const router = Router(); ,criamos nossos endpoints
+//Vamos criar o primeiro endpoint de teste chamado: PinPong para saber se a api esta funcionando
+// a api estara esperando uma requisição get para /ping:
+
+router.get('/ping', (req, res) => {
+    res.json({pong: true});
+});
+
+Passo 4
+Devemos colocar no servidor os:
+
+import apiRoutes from './routes/api'
+
+antes da função 404:
+
+server.use(apiRoutes);
+
+Apartir de agora nosso servidor tera a seguinte rota: /ping
+
+Passo 4
+Testando no navegador
+http://localhost:4000/ping
+deve ser retornado um pong true
+
+Passo 5
+Caso queira não queira o /ping apos o site para nao ter que alterar em todos os endpoints
+podemos colocar o que vem antes do /ping no servidor 'server.ts':
+server.use('/api', apiRoutes); dessa forma tudo que colocar nas rotas tera o prefixo /api/ping
+exe: localhost:4000/api/ping
+
+Caso o sistema apenas for uma api não tem necessidade de colocar um prefixo
+
+Passo 6
+Criando segunda rota
+//Criando um numero radomico, vamos retornar um numero aletorio
+router.get('/random', (req,res) => {
+    let nRand: number = Math.floor( Math.random() * 10);// Gerando um numero aleatorio entre 0 e 10
+
+    res.json({number: nRand});
+});
+
+testando em: http://localhost:4000/random
+
+Passo 7
+Criando a terceira rota / um endpoint dinamico
+//Enviar um nome e retornar este nome para indicar que estamos recebendo dados
+router.get('/nome/:nome', (req, res) => {
+    let nome: string = req.params.nome;
+
+    res.json({nome});
+//res.json({nome: `Você enviou o nome: ${nome}`});//exibindo com template string
+}) ;
+
+testando em: http://localhost:4000/nome/joao
+
+
+
+
+

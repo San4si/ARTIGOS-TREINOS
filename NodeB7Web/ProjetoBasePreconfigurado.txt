@@ -1,0 +1,58 @@
+Git clone em https://github.com/suporteb7web/node-base-api
+
+Passo 1 
+Configurar o banco de dados no arquivo env na variavel de ambiente
+Renomear o banco e colocar o mesmo nome no banco de dados
+
+Passo 2
+Ir no banco de dados postgres criar o database com o mesmo nome que colocou no arquivo env
+
+Passo 3
+Ir no terminal e dar o comando:
+npm install
+
+Passo 4
+Vamos para o banco de dados criar as tabelas para armazenar as informações e tarefas para o projeto
+No banco > Em public > botao direito > create new table
+Dar o nome da tabela e apos > botao direito > nova coluna
+dar o nome pra coluna no meu caso o nome foi id int nao nulo: v
+e ir criando conforme a necessidade
+
+Passo 5 
+Apos criado o banco de dados temos que criar a referencia dele no model
+Na pasta model criar um arquivo com o nome desejado e dar os import sequelize e instances
+
+import { Model, DataTypes } from 'sequelize';
+import {sequelize} from '../instances/pg';
+
+//criando a interface
+export interface TodoInstance extends Model {
+    id: number;
+    title: string;
+    done: boolean
+}
+
+//criando o model
+export const Todo = sequelize.define<TodoInstance>('Todo', {
+    id: {
+        primaryKey: true,
+        autoIncrement: true,
+        type: DataTypes.INTEGER
+    },
+    title: {
+        type: DataTypes.STRING
+    },
+    done : {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    }
+}, {
+    tableName: 'todos',
+    timestamps: false
+});
+
+Passo 6
+Ir em routes e criar nossas rotas
+
+
+

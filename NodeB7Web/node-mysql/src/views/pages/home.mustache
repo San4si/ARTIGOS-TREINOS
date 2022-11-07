@@ -2,11 +2,55 @@
 
 Opa {{name}} {{lastName}}, tudo bem?
 {{#showOld}}
-    Como vai a vida?
+    CADASTRE SE
 {{/showOld}}
 {{^showOld}}
-    Beleza?
+    NOVO CADASTRO
 {{/showOld}}
+<hr/>
+<fieldset>
+    <legend>NOVO USUARIO</legend>
+    <form method="POST" action="/novousuario">
+        <input type="text" name="name" placeholder="Digite seu nome"/><br/><br/>
+        <input type="text" name="age" placeholder="Digite sua idade"/><br/><br/>
+        <input type="submit" value="Inserir Usuário"/>
+    </form>
+</fieldset>
+<hr/>
+
+<hr/>
+<fieldset>
+    <legend>EDITAR USUARIO</legend>
+    <form method="POST" action="/alterarusuario">
+        <input type="text" name="name" placeholder="Digite o novo nome"/><br/><br/>
+        <input type="text" name="age" placeholder="Digite a idade"/><br/><br/>
+        <input type="number" name="id" placeholder="Digite o id do usuario"/><br/><br/>
+        <input type="submit" value="Alterar Usuário"/>
+    </form>
+</fieldset>
+<hr/>
+
+<hr/>
+<fieldset>
+    <legend>DELETAR USUARIO</legend>
+    <form method="POST" action="/deletarusuario">
+        <input type="number" name="id" placeholder="Digite o id do usuario"/><br/><br/>
+        <input type="submit" value="deletar Usuário"/>
+    </form>
+</fieldset>
+<hr/>
+
+<h2>Exibindo Usuários do Banco</h2>
+<ul>
+    {{#users}}
+        <li>{{name}} 
+        - Idade: {{age}}
+        -<a href="/usuario/{{id}}/mais">+</a>
+        -<a href="/usuario/{{id}}/menos">-</a>
+        -<a href="/usuario/{{id}}/excluir">Excluir</a>
+        </li>
+    {{/users}}
+</ul>
 
 <hr/>
 <h2>Produtos</h2>
