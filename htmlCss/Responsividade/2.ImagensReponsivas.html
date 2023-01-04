@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Imagens responsivas</h1>
+    Podemos mudar a imagem de acordo com a resolução escolhida, devemos usar uma tag chamada picture e source
+    Uma area de imagem que podemos setar na imagem o tamanho que quiser de acordo com a resolução
+    <picture>
+        <source media="(min-width: 650px)" srcset="img2.jpg" /> <!--Quando a tela chegar a 650px troca para esta imagem-->
+        <source media="(min-width: 450px)" srcset="img3.jpg" /> <!--Quando a tela chegar a 450px troca para esta imagem-->
+        <img src="img1.jpg"/> <!--Imagem padrão-->
+    </picture>
+</body>
+</html>

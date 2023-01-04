@@ -1,0 +1,18 @@
+Biblioteca Json Web Token
+
+https://www.npmjs.com/package/jsonwebtoken
+
+npm install jsonwebtoken
+npm install -D @types/jsonwebtoken
+
+na api controller colocar dentro de login ma condição if 
+
+const token = JWT.sign(//Gerando o token JWT
+            {id: user.id, email: user.email},
+            process.env.JWT_SECRET_KEY as string, 
+            { expiresIn: '2h' }//usando um terceiro parametro opcional, para colocar outras opçoes como tempo de expiração
+            );
+
+processo de autorização JWT é feito no middlewares
+
+

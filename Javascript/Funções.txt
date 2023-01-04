@@ -1,0 +1,290 @@
+FUNÇÕES EM STRING
+
+Descobrir quantos caracteres tem
+variavel.length;
+
+Retorna a posição em que o texto ou item se encontra, se nao encontrar nada retorna -1
+variavel.indexOf('Sandro');
+
+Retorna uma procura filtro
+variavel.slice(0,10); retorna (apartir da posição, até onde vc quer) ou variavel.slice(-4)
+
+Retorna uma procura filtro
+variavel.substring(0,10); retorna (apartir da posição, até onde vc quer) nao existe a possibilidade pegar com numero negativo
+
+Retorna um um filtro
+varivel.substr(9,15);  retorna (apartir da posição, e a quantidade de caractere) ou variavel.substr(-4,2);
+
+Substituir textos especificos
+variavel.replace('Sandro','Lacerda'); (pesquise por x, substitua por y)
+
+Colocar Frase maiuscula
+variavel.toUpperCase();
+
+Colocar Frase minuscula
+variavel.toLoweCase();
+
+Concatenando informaçãoes
+variavel.concat(' ','Sandro') ou Varivel + Sandro
+
+Remove espaços vazios de um textou ou string
+variavel.trim();
+
+Descobrindo qual caractere esta na posição x
+variavel.charAt(3); (colocar a posição) ou substr() ou variavel[3]; (usar esta função apartir ecmascript 5).
+
+Transforma String em Array
+variavel.split(' '); onde encontrar um (espaço ou item escolhido) dividi a string
+
+FUNÇÕES EM NUMEROS
+
+Converte um numero em string
+variavel.toString();
+
+Casas Decimais
+variavel.toFixed(2); toFixed(quantidade de decimais desejado apos a virgula)
+
+Converte uma string em numero
+parseInt(variavel)
+
+Preserva os decimais 
+parseFloat(variavel)
+
+
+METODOS RESPONSAVEIS POR MANIPULAÇÃO EM ARRAY
+
+Juntar todos os itens do array e separar por virgula
+variavel.toString();
+
+Separa um array por item que colocar no parametro
+variavel.join('_');
+
+Retorna a posição do item procurado
+variavel.indexOf('Corante'); indexOf('item procurado');
+
+Remove o ultimo item do array
+variavel.pop();
+
+Remove o primeiro item do array
+variavel.shift();
+
+Adiciona um novo item no array
+variavel.push('Prato'); ou variavel[4] = 'Prato'
+
+Remove um item do Array
+variavel.slice(1,1);slice(qual item, quantos item);
+
+Juntar dois arrays
+array1.concat(array2);
+
+Ordenar o array em ordem alfabetica
+array.sort();
+
+Ordenar decrescente
+array.sort(); primeiro ordena, depois ordena decrescente
+array.reverse();
+
+Rodar uma função em todos os iten do array(exe: dobrar cada numero do array)
+let array1 = [45,4,9,16,25];
+let array2 = []
+
+array2 = array1.map(function(item) {
+	return item *2;
+});
+
+let res = array2;
+
+Pegando apenas numeros menores que 20
+let array1 = [45,4,9,16,25];
+let array2 = []
+
+array2 = array1.filter(function(item) {
+	if(item <=20){
+	return true;
+}else
+	return false;
+});
+
+let res = array2;
+
+Procurando alguma coisa no array
+let array1 = [45,4,9,16,25];
+let array2 = []
+
+array2 = array1.find(function(item) {
+	return (item == 16)? true : false;
+});
+let res = array2;
+
+Retorna o item procura como posição do item
+let array1 = [45,4,9,16,25];
+let array2 = []
+
+array2 = array1.findIndex(function(item) {
+	return (item == 16)? true : false;
+});
+let res = array2;
+
+Datas 
+
+let d = new Date(); vai retornar todas as informações complestas de datas e horario
+
+alguma formas de exibir formas de pegar a mesma informação
+
+console.log(d.toDateString());
+
+pegar sem fuso horario
+
+console.log(d.toUTCString()); retorna o horario oficial americano
+
+
+
+Classe Date() tem a opção de colocar 7 parametros
+
+let d = new date(2020,0, 1, 12, 30, 12); ano, mes, dia, hora, minutos, segundos, milessimo
+setando com todos os parametros gera uma data com todas as informações setadas
+
+0utras formas
+padrao mais utilizado
+let d = new Date('2020-01-01 15:42:17')
+
+Manipulando datas
+
+Pegando somente o ano
+let d = new Date();
+d.getFullYear(); pegando o ano
+
+Pegando o mes
+d.getMonth();
+
+Pegando o dia da semana
+d.getDay();
+
+Pegar o dia atual
+d.getDate();
+
+Pegar a hora
+d.getHours();
+
+Pegar os minutos
+d.getMinutes();
+
+Pegar os segundos
+d.getSeconds();
+
+Pegar os milesegundos
+d.getMilliseconds();
+
+Pegar o timestamps(quantidade de milesgundos)
+d.getTime();
+
+PEGANDO O TIMESTAMPS ATUAL SEM DEFINIR UMA VARIVEL
+Date.now();
+
+ALTERAR AS INFORMAÇÃO DAS DATAS
+
+setDate(2022); sempre setando com as informações no parametro com set
+
+Aumentando os dias, de 10 em 10
+d.setDate(d.getDate() + 10);
+
+Aumentando 6 horas
+d.setHours(d.getHours() + 6);
+
+
+FUNÇOES RELACIONADAS A MATEMATICA
+
+DECLARANDO O VALOR DE PI
+let novoValor = Math.PI;
+
+AREDONDA O NUMERO
+Math.round(3.47)
+
+ARREDONDA PRA BAIXO
+Math.floor(3.53)
+
+ARREDONDA PRA CIMA
+Math.ceil(3.99)
+
+ABSOLUTO DO NUMERO(O POSITIVO DELE)
+Math.abs(-9.65464);
+
+DECOBRIR O MENOR NUMERO
+Math.min(7,100,600,20,3); r:3
+
+DESCOBRINDO MAIOR NUMERO
+Math.max(7,100,600,20,3); r: 600
+
+RETORNANDO UM NUMERO ALEATORIO ENTRE 0 E 1
+Math.random();
+
+RETORNANDO UM NUMERO ALEATORIO MENOR QUE 100
+Math.floor(Math.random() * 100);
+
+CRIANDO EVENTOS COM INTERVALOS E TIMES (Hora)
+
+
+//setTimeout = espera um tempo e roda a função
+//setInterval = de x em x tempo roda a função
+
+DESCONTRUÇÃO DE OBJETOS (DESESTRUTURAÇÃO)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./15.DistanciaScrollSuave.css"/>
+    <title>Document</title>
+</head>
+<body>
+    <div class="texto">
+        Scroll em barra de rolagem em elemento ou tela inteira, manipulações para encontrar scroll ou criar scroll suave
+    </br>
+    Como saber onde esta o scroll: Tela inteira, scroll da propria tela usamos o: windown
+</br> se for de um elemento especifico selecionamos o elemento:
+    document.querySelector('.texto').scrollTop para pegar a posição do scroll vertical
+    document.querySelector('.texto').scrollLeft pega o scroll horizontal
+  
+    No caso da tela inteira para pegar a informação: window.scrollY para vertical
+    window.scrollX para vertical  
+    Comando para alterar o scroll document.querySelector('.texto').scrollTo(0,0) <br/>
+    Comando para scroll suave document.querySelector('.texto').scrollTo(){window.scrollTo({top: 0, left: 0, behavior: 'smooth'})};
+</div>
+    <div onclick="subirTela()" class="scrollbutton"></div>
+    <script src="./15.DistanciaScrollSuave.js"></script>
+</body>
+</html>

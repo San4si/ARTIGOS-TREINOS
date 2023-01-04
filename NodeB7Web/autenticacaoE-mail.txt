@@ -54,9 +54,6 @@ Devemos tornar as rotas privadas colocando o private da seguinte forma nas rotas
 router.get('/list', Auth.private, ApiController.list);
 
 
-Passo 3
-Fazendo um atenticação ultilizando o - Basic Auth
-toda requisição que fizer tambem manda user e senha nos cabeçalhos da requisição
 
 
 

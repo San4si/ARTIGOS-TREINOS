@@ -1,0 +1,55 @@
+
+Realiza a criação de consentimento
+POST /consents/v1
+201	Consentimento criado com sucesso.	Sucesso
+CreateConsent
+
+Obtém a os dados de consentimento. 
+GET /consents/v1/{consentId}
+200	OK	Sucesso 	ResponseConsent
+
+Deleta o consentimento. 
+DELETE /consents/v1/{consentId}
+
+Name			Type			Required	Restrictions	Description
+
+data			object			true		none
+
+consentId		string			true		none
+creationDateTime	string(date-time)	true		none
+status			string			true		none
+statusUpdateDateTime	string(date-time)	true		none
+permissions		[string]		true		none
+expirationDateTime	string(date-time)	true		none
+transactionFromDateTime	string(date-time)	false		none
+transactionToDateTime	string(date-time)	false		none
+
+
+
+links			Links			false		none
+meta			Meta			false		none
+
+
+    "consentId": string true
+    "creationDateTime": "2021-05-21T08:30:00Z",
+    "status": "AWAITING_AUTHORISATION",
+    "statusUpdateDateTime": "2021-05-21T08:30:00Z",
+    "permissions": [
+	  "PENSION_RISK_READ",
+        "CAPITALIZATION_TITLES_READ",
+        "RESOURCES_READ"
+      ],
+    "expirationDateTime": "2021-05-21T08:30:00Z",
+    "transactionFromDateTime": "2021-01-01T00:00:00Z",
+    "transactionToDateTime": "2021-02-01T23:59:59Z"
+  },
+
+
+"id": 8,
+            "creationdatetime": "2022-01-11 17:04:00",
+            "status": "AWAITING_AUTHORISATION",
+            "statusupdatedatetime": "2022-01-11 17:04:00",
+            "permissions": "CAPITALIZATION_TITLES_READ",
+            "expirationdatetime": "2022-01-11 17:04:00",
+            "transactionfromdatetime": "2022-01-11 17:04:00",
+            "transactiontodatetime": "2022-01-11 17:04:00"
