@@ -1,0 +1,100 @@
+CREATE TABLE users 
+( 
+ id INT PRIMARY KEY,  
+ name VARCHAR(n),  
+ email VARCHAR(n),  
+ password VARCHAR(n),  
+); 
+
+CREATE TABLE users_addresses 
+( 
+ id INT,  
+ id_user INT,  
+ street VARCHAR(n),  
+ street_number VARCHAR(n),  
+ zipcode VARCHAR(n),  
+ id_district INT PRIMARY KEY,  
+ city VARCHAR(n),  
+ state VARCHAR(n),  
+ complement VARCHAR(n),  
+); 
+
+CREATE TABLE orders 
+( 
+ id INT PRIMARY KEY,  
+ id_user INT,  
+ id_tenant INT,  
+ id_address INT PRIMARY KEY,  
+ payment_method VARCHAR(n),  
+ payment_money_return FLOAT,  
+ delivery_price FLOAT,  
+ subtotal FLOAT,  
+ order_date DATE,  
+ status VARCHAR(n),  
+); 
+
+CREATE TABLE tenants 
+( 
+ id INT PRIMARY KEY,  
+ slug VARCHAR(n),  
+ status VARCHAR(n),  
+ name VARCHAR(n),  
+ main_color VARCHAR(n),  
+ email VARCHAR(n),  
+ password VARCHAR(n),  
+); 
+
+CREATE TABLE districts 
+( 
+ id INT,  
+ id_tenant INT,  
+ name VARCHAR(n),  
+ price FLOAT,  
+); 
+
+CREATE TABLE order_products 
+( 
+ id INT PRIMARY KEY,  
+ id_order INT,  
+ id_product INT PRIMARY KEY,  
+ product_price FLOAT,  
+ quantity INT,  
+); 
+
+CREATE TABLE products 
+( 
+ id INT,  
+ id_tenant INT,  
+ id_category INT PRIMARY KEY,  
+ name VARCHAR(n),  
+ img VARCHAR(n),  
+ price FLOAT,  
+ description CHAR(n),  
+); 
+
+CREATE TABLE categories 
+( 
+ id INT,  
+ id_tenant INT,  
+ name VARCHAR(n),  
+); 
+
+CREATE TABLE banners 
+( 
+ id INT PRIMARY KEY,  
+ id_tenant INT,  
+ img VARCHAR(n),  
+); 
+
+ALTER TABLE users_addresses ADD FOREIGN KEY(id) REFERENCES orders (id)
+ALTER TABLE users_addresses ADD FOREIGN KEY(id_user) REFERENCES users (id_user)
+ALTER TABLE orders ADD FOREIGN KEY(id_user) REFERENCES users (id_user)
+ALTER TABLE orders ADD FOREIGN KEY(id_tenant) REFERENCES tenants (id_tenant)
+ALTER TABLE districts ADD FOREIGN KEY(id) REFERENCES users_addresses (id)
+ALTER TABLE districts ADD FOREIGN KEY(id_tenant) REFERENCES tenants (id_tenant)
+ALTER TABLE order_products ADD FOREIGN KEY(id_order) REFERENCES orders (id_order)
+ALTER TABLE products ADD FOREIGN KEY(id) REFERENCES order_products (id)
+ALTER TABLE products ADD FOREIGN KEY(id_tenant) REFERENCES tenants (id_tenant)
+ALTER TABLE categories ADD FOREIGN KEY(id) REFERENCES products (id)
+ALTER TABLE categories ADD FOREIGN KEY(id_tenant) REFERENCES tenants (id_tenant)
+ALTER TABLE banners ADD FOREIGN KEY(id_tenant) REFERENCES tenants (id_tenant)
